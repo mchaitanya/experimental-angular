@@ -16,17 +16,13 @@
             "outputPath": "dist/my-first-app",
             "index": "projects/my-first-app/src/index.html",
             "browser": "projects/my-first-app/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/my-first-app/tsconfig.app.json",
             "assets": [
               "projects/my-first-app/src/favicon.ico",
               "projects/my-first-app/src/assets"
             ],
-            "styles": [
-              "projects/my-first-app/src/styles.css"
-            ],
+            "styles": ["projects/my-first-app/src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -74,18 +70,13 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/my-first-app/tsconfig.spec.json",
             "assets": [
               "projects/my-first-app/src/favicon.ico",
               "projects/my-first-app/src/assets"
             ],
-            "styles": [
-              "projects/my-first-app/src/styles.css"
-            ],
+            "styles": ["projects/my-first-app/src/styles.css"],
             "scripts": []
           }
         }
