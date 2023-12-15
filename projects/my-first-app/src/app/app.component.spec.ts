@@ -20,12 +20,10 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('my-first-app');
   });
 
-  it('should render title', () => {
+  it('should render "Hello world"', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Hello, my-first-app'
-    );
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello world');
   });
 });
