@@ -4,11 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 
 import { HousingLocation } from '../housing-location';
 import { HousingService } from '../housing.service';
+import { YesNoPipe } from '../yes-no.pipe';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, YesNoPipe],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css',
 })
