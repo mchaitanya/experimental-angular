@@ -23,10 +23,8 @@
     <form [formGroup]="applyForm" (submit)="submitApplication()">
       <label for="first-name">First name</label>
       <input type="text" id="first-name" formControlName="firstName" />
-
       <label for="last-name">Last name</label>
       <input type="text" id="last-name" formControlName="lastName" />
-
       <label for="email">Email</label>
       <input type="text" id="email" formControlName="email" />
       <button class="primary" type="submit">Apply now</button>
