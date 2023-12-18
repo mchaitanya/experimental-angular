@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { HousingLocation } from '../housing-location';
 import { HousingService } from '../housing.service';
@@ -13,21 +14,22 @@ import { YesNoPipe } from '../yes-no.pipe';
   templateUrl: './details.component.html',
   styleUrl: './details.component.css',
 })
-export class DetailsComponent {
+export class DetailsComponent implements OnInit, OnDestroy {
   route: ActivatedRoute = inject(ActivatedRoute);
   housingService = inject(HousingService);
   housingLocation: HousingLocation | undefined;
+  sub: Subscription | undefined;
   applyForm = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
     email: new FormControl(''),
   });
 
-  constructor() {
+  ngOnInit() {
     const housingLocationId = Number(this.route.snapshot.params['id']);
-    this.housingService
+    this.sub = this.housingService
       .getHousingLocationById(housingLocationId)
-      .then(housingLocation => {
+      .subscribe(housingLocation => {
         this.housingLocation = housingLocation;
       });
   }
@@ -38,5 +40,9 @@ export class DetailsComponent {
       this.applyForm.value.lastName ?? '',
       this.applyForm.value.email ?? ''
     );
+  }
+
+  ngOnDestroy() {
+    this.sub?.unsubscribe();
   }
 }

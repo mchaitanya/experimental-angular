@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { HousingLocation } from '../housing-location';
 import { HousingLocationComponent } from '../housing-location/housing-location.component';
@@ -12,15 +13,16 @@ import { HousingService } from '../housing.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit, OnDestroy {
   housingLocations: HousingLocation[] = [];
   filteredLocations: HousingLocation[] = [];
   housingService: HousingService = inject(HousingService);
+  sub: Subscription | undefined;
 
-  constructor() {
-    this.housingService
+  ngOnInit() {
+    this.sub = this.housingService
       .getAllHousingLocations()
-      .then((housingLocations: HousingLocation[]) => {
+      .subscribe((housingLocations: HousingLocation[]) => {
         this.housingLocations = housingLocations;
         this.filteredLocations = housingLocations;
       });
@@ -36,5 +38,9 @@ export class HomeComponent {
       housingLocation =>
         housingLocation?.city.toLowerCase().includes(text.toLowerCase())
     );
+  }
+
+  ngOnDestroy() {
+    this.sub?.unsubscribe();
   }
 }
