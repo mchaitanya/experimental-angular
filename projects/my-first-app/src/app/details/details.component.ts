@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -15,8 +15,6 @@ import { YesNoPipe } from '../yes-no.pipe';
   styleUrl: './details.component.css',
 })
 export class DetailsComponent implements OnInit, OnDestroy {
-  route: ActivatedRoute = inject(ActivatedRoute);
-  housingService = inject(HousingService);
   housingLocation: HousingLocation | undefined;
   sub: Subscription | undefined;
   applyForm = new FormGroup({
@@ -24,6 +22,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
     lastName: new FormControl(''),
     email: new FormControl(''),
   });
+
+  constructor(
+    private route: ActivatedRoute,
+    private housingService: HousingService
+  ) {}
 
   ngOnInit() {
     const housingLocationId = Number(this.route.snapshot.params['id']);

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { HousingLocation } from '../housing-location';
@@ -16,8 +16,9 @@ import { HousingService } from '../housing.service';
 export class HomeComponent implements OnInit, OnDestroy {
   housingLocations: HousingLocation[] = [];
   filteredLocations: HousingLocation[] = [];
-  housingService: HousingService = inject(HousingService);
   sub: Subscription | undefined;
+
+  constructor(private housingService: HousingService) {}
 
   ngOnInit() {
     this.sub = this.housingService
