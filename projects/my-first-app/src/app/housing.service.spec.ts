@@ -51,11 +51,13 @@ describe('HousingService', () => {
       'http://localhost:3000/locations',
       'Request to get housing locations'
     );
-    expect(req.request.method).toBe('GET');
+    expect(req.request.method).withContext('Request method').toBe('GET');
 
     // Flush the request, causing it to complete.
     req.flush([LOCATION]);
-    await expectAsync(housingLocations).toBeResolvedTo([LOCATION]);
+    await expectAsync(housingLocations)
+      .withContext('Data fetched')
+      .toBeResolvedTo([LOCATION]);
   });
 
   it('#getHousingLocationById should return housing location with given id.', async () => {
@@ -67,9 +69,11 @@ describe('HousingService', () => {
       'http://localhost:3000/locations/1',
       'Request to get housing location with id 1'
     );
-    expect(req.request.method).toBe('GET');
+    expect(req.request.method).withContext('Request method').toBe('GET');
 
     req.flush(LOCATION);
-    await expectAsync(housingLocation).toBeResolvedTo(LOCATION);
+    await expectAsync(housingLocation)
+      .withContext('Data fetched')
+      .toBeResolvedTo(LOCATION);
   });
 });

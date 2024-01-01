@@ -54,8 +54,8 @@ describe('HousingLocationComponent', () => {
   it('should render listing location', () => {
     const locationEl: HTMLElement =
       fixture.nativeElement.querySelector('.listing-location')!;
-    expect(locationEl.textContent).toContain('Irvine');
-    expect(locationEl.textContent).toContain('CA');
+    expect(locationEl.textContent).withContext('City name').toContain('Irvine');
+    expect(locationEl.textContent).withContext('State name').toContain('CA');
   });
 
   it('should render listing photo', () => {
@@ -67,8 +67,10 @@ describe('HousingLocationComponent', () => {
   it('should render detail link', () => {
     const linkDe = fixture.debugElement.query(By.directive(RouterLink));
     const routerLink = linkDe.injector.get(RouterLink);
-    expect(linkDe.nativeElement.textContent).toContain('Learn more');
-    expect(routerLink.href).toBe('/details/10');
+    expect(linkDe.nativeElement.textContent)
+      .withContext('Link text')
+      .toContain('Learn more');
+    expect(routerLink.href).withContext('Link destination').toBe('/details/10');
   });
 
   it('should route to detail page', fakeAsync(() => {
