@@ -1,4 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { Router, RouterLink } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { HousingLocation } from '../housing-location';
@@ -57,10 +64,19 @@ describe('HousingLocationComponent', () => {
     expect(photoEl.src).toBe('http://mirador.com/image');
   });
 
-  // it('should render link to detail page', () => {
-  //   const linkDe = fixture.debugElement.query(By.css('a'));
-  //   const router = TestBed.inject(Router);
-  //   linkDe.triggerEventHandler('click', { button: 0 });
-  //   expect(router.url).toBe('details/10');
-  // });
+  it('should render detail link', () => {
+    const linkDe = fixture.debugElement.query(By.directive(RouterLink));
+    const routerLink = linkDe.injector.get(RouterLink);
+    expect(linkDe.nativeElement.textContent).toContain('Learn more');
+    expect(routerLink.href).toBe('/details/10');
+  });
+
+  it('should route to detail page', fakeAsync(() => {
+    const linkDe = fixture.debugElement.query(By.directive(RouterLink));
+    const router = TestBed.inject(Router);
+    router.resetConfig([{ path: '**', children: [] }]);
+    linkDe.triggerEventHandler('click', { button: 0 });
+    tick();
+    expect(router.url).toBe('/details/10');
+  }));
 });
