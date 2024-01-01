@@ -13,9 +13,13 @@
   <section class="listing-features">
     <h2 class="section-heading">About this housing location</h2>
     <ul>
-      <li>Units available: {{ housingLocation?.availableUnits }}</li>
-      <li>Does this location have wifi? {{ housingLocation?.wifi | yesNo }}</li>
-      <li>
+      <li class="listing-features__units">
+        Units available: {{ housingLocation?.availableUnits }}
+      </li>
+      <li class="listing-features__wifi">
+        Does this location have wifi? {{ housingLocation?.wifi | yesNo }}
+      </li>
+      <li class="listing-features__laundry">
         Does this location have laundry? {{ housingLocation?.laundry | yesNo }}
       </li>
     </ul>
