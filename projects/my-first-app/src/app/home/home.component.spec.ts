@@ -1,21 +1,25 @@
+import { Component, Input } from '@angular/core';
 import {
   ComponentFixture,
   TestBed,
   fakeAsync,
   tick,
 } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { defer } from 'rxjs';
 
 import { HousingLocation } from '../housing-location';
+import { HousingLocationComponent } from '../housing-location/housing-location.component';
 import { HousingService } from '../housing.service';
 import { HomeComponent } from './home.component';
 
-// Test somehow works without having to import either the real or stub HousingLocationComponent.
-// @Component({ standalone: true, selector: 'app-housing-location', template: '' })
-// class HousingLocationComponentStub {
-//   @Input() housingLocation: HousingLocation | undefined;
-// }
+@Component({
+  standalone: true,
+  selector: 'app-housing-location',
+  template: '<p>{{housingLocation?.city}}</p>',
+})
+class HousingLocationStubComponent {
+  @Input() housingLocation: HousingLocation | undefined;
+}
 
 const LOCATION_HYD: HousingLocation = {
   id: 2,
@@ -94,10 +98,14 @@ describe('HomeComponent', () => {
 
     beforeEach(async () => {
       await TestBed.configureTestingModule({
-        // Without the RouterTestingModule, the test fails because it can't find a provider for ActivatedRoute.
-        imports: [HomeComponent, RouterTestingModule],
+        imports: [HomeComponent],
         providers: [{ provide: HousingService, useValue: housingServiceSpy }],
-      }).compileComponents();
+      })
+        .overrideComponent(HomeComponent, {
+          remove: { imports: [HousingLocationComponent] },
+          add: { imports: [HousingLocationStubComponent] },
+        })
+        .compileComponents();
 
       fixture = TestBed.createComponent(HomeComponent);
       component = fixture.componentInstance;
