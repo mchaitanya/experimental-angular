@@ -90,6 +90,100 @@
           }
         }
       }
+    },
+    "recipe-book": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/recipe-book",
+      "sourceRoot": "projects/recipe-book/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/recipe-book",
+            "index": "projects/recipe-book/src/index.html",
+            "browser": "projects/recipe-book/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "projects/recipe-book/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/recipe-book/src/favicon.ico",
+              "projects/recipe-book/src/assets"
+            ],
+            "styles": ["projects/recipe-book/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "recipe-book:build:production"
+            },
+            "development": {
+              "buildTarget": "recipe-book:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "recipe-book:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "projects/recipe-book/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/recipe-book/src/favicon.ico",
+              "projects/recipe-book/src/assets"
+            ],
+            "styles": ["projects/recipe-book/src/styles.scss"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/recipe-book/**/*.ts",
+              "projects/recipe-book/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
