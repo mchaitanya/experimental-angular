@@ -184,6 +184,100 @@
           }
         }
       }
+    },
+    "hello-clarity": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/hello-clarity",
+      "sourceRoot": "projects/hello-clarity/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/hello-clarity",
+            "index": "projects/hello-clarity/src/index.html",
+            "browser": "projects/hello-clarity/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "projects/hello-clarity/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/hello-clarity/src/favicon.ico",
+              "projects/hello-clarity/src/assets"
+            ],
+            "styles": ["projects/hello-clarity/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "hello-clarity:build:production"
+            },
+            "development": {
+              "buildTarget": "hello-clarity:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "hello-clarity:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "projects/hello-clarity/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/hello-clarity/src/favicon.ico",
+              "projects/hello-clarity/src/assets"
+            ],
+            "styles": ["projects/hello-clarity/src/styles.scss"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/hello-clarity/**/*.ts",
+              "projects/hello-clarity/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
