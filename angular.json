@@ -209,7 +209,10 @@
               "projects/hello-clarity/src/favicon.ico",
               "projects/hello-clarity/src/assets"
             ],
-            "styles": ["projects/hello-clarity/src/styles.scss"],
+            "styles": [
+              "node_modules/@clr/ui/clr-ui.min.css",
+              "projects/hello-clarity/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
