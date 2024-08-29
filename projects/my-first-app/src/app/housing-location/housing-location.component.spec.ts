@@ -28,7 +28,6 @@ describe('HousingLocationComponent', () => {
       name: 'Mirador',
       city: 'Irvine',
       state: 'CA',
-      photo: 'http://mirador.com/image',
       availableUnits: 100,
       wifi: true,
       laundry: true,
@@ -56,12 +55,6 @@ describe('HousingLocationComponent', () => {
       fixture.nativeElement.querySelector('.listing-location')!;
     expect(locationEl.textContent).withContext('City name').toContain('Irvine');
     expect(locationEl.textContent).withContext('State name').toContain('CA');
-  });
-
-  it('should render listing photo', () => {
-    const photoEl: HTMLImageElement =
-      fixture.nativeElement.querySelector('.listing-photo')!;
-    expect(photoEl.src).toBe('http://mirador.com/image');
   });
 
   it('should render detail link', () => {

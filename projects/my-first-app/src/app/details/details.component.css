@@ -1,11 +1,3 @@
-.listing-photo {
-  height: 600px;
-  width: 50%;
-  object-fit: cover;
-  border-radius: 30px;
-  float: right;
-}
-
 .listing-heading {
   font-size: 48pt;
   font-weight: bold;
@@ -65,11 +57,4 @@ input {
   border-right: none;
   border-left: none;
   border-bottom: solid 0.3px;
-}
-
-@media (max-width: 1024px) {
-  .listing-photo {
-    width: 100%;
-    height: 400px;
-  }
 }

@@ -14,7 +14,6 @@ const LOCATION: HousingLocation = {
   name: 'Acme',
   city: 'NYC',
   state: 'NY',
-  photo: 'http://image/url',
   availableUnits: 1,
   wifi: true,
   laundry: true,

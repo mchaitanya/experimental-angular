@@ -12,7 +12,6 @@ const LOCATION: HousingLocation = {
   name: 'Lanco',
   city: 'Hyderabad',
   state: 'TL',
-  photo: 'http://lanco.com/image',
   availableUnits: 10,
   wifi: true,
   laundry: false,
@@ -71,15 +70,6 @@ describe('DetailsComponent', () => {
       .toContain('TL');
   });
 
-  it('should render listing photo', () => {
-    expect(page.listingPhoto.src)
-      .withContext('Photo URL')
-      .toBe('http://lanco.com/image');
-    expect(page.listingPhoto.alt)
-      .withContext('Photo alt text')
-      .toContain('Lanco');
-  });
-
   it('should render listing units available', () => {
     expect(page.listingUnits.textContent).toContain('10');
   });
@@ -102,10 +92,6 @@ class Page {
 
   get listingLocation() {
     return this.query<HTMLElement>('.listing-location');
-  }
-
-  get listingPhoto() {
-    return this.query<HTMLImageElement>('.listing-photo');
   }
 
   get listingUnits() {
