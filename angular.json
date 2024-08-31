@@ -115,7 +115,12 @@
               "projects/recipe-book/src/favicon.ico",
               "projects/recipe-book/src/assets"
             ],
-            "styles": ["projects/recipe-book/src/styles.scss"],
+            "styles": [
+              "node_modules/@cds/core/global.min.css",
+              "node_modules/@cds/core/styles/theme.dark.min.css",
+              "node_modules/@clr/ui/clr-ui.min.css",
+              "projects/recipe-book/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
