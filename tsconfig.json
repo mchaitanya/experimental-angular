@@ -18,7 +18,11 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": ["ES2022", "dom"]
+    "lib": ["ES2022", "dom"],
+    "paths": {
+      "@recipe-book/core/*": ["./projects/recipe-book/src/app/core/*"],
+      "@recipe-book/*": ["./projects/recipe-book/src/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
