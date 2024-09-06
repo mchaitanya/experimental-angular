@@ -155,6 +155,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "projects/recipe-book/server/proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "recipe-book:build:production"
