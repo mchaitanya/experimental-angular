@@ -9,7 +9,8 @@
     "test": "ng test",
     "prepare": "husky install",
     "lint": "ng lint",
-    "server": "json-server"
+    "server": "json-server",
+    "server:recipe-book": "json-server --config=projects/recipe-book/server/json-server.json projects/recipe-book/server/db.json"
   },
   "private": true,
   "dependencies": {
