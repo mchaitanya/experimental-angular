@@ -1,15 +1,15 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { ClarityIcons, bookIcon } from '@cds/core/icon';
 import { ClrIconModule } from '@clr/angular';
+
+import { RecipeListComponent } from './features/recipe-list/recipe-list.component';
 
 ClarityIcons.addIcons(bookIcon);
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, ClrIconModule],
+  imports: [ClrIconModule, RecipeListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
