@@ -8,16 +8,16 @@ import { HousingLocation } from './housing-location';
   providedIn: 'root',
 })
 export class HousingService {
-  url = 'http://localhost:3000/locations';
+  private readonly URL = 'http://localhost:3000/locations';
 
   constructor(private http: HttpClient) {}
 
   getAllHousingLocations(): Observable<HousingLocation[]> {
-    return this.http.get<HousingLocation[]>(this.url);
+    return this.http.get<HousingLocation[]>(this.URL);
   }
 
   getHousingLocationById(id: number): Observable<HousingLocation | undefined> {
-    return this.http.get<HousingLocation | undefined>(`${this.url}/${id}`);
+    return this.http.get<HousingLocation | undefined>(`${this.URL}/${id}`);
   }
 
   submitApplication(firstName: string, lastName: string, email: string) {
