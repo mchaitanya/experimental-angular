@@ -38,16 +38,35 @@ describe('RecipeService', () => {
     httpTesting.verify();
   });
 
-  it('#getRecipes should return recipes', async () => {
-    const recipes = firstValueFrom(recipeService.getRecipes());
-    const req = httpTesting.expectOne(
-      '/api/recipes',
-      'Request to fetch recipes'
-    );
-    expect(req.request.method).withContext('Request method').toBe('GET');
-    req.flush([RECIPE]);
-    await expectAsync(recipes)
-      .withContext('Recipes fetched')
-      .toBeResolvedTo([RECIPE]);
+  describe('#getRecipes', () => {
+    it('should return recipes', async () => {
+      const recipes = firstValueFrom(recipeService.getRecipes());
+      const req = httpTesting.expectOne(
+        {
+          method: 'GET',
+          url: '/api/recipes',
+        },
+        'GET request for recipes'
+      );
+      req.flush([RECIPE]);
+      await expectAsync(recipes)
+        .withContext('Recipes fetched')
+        .toBeResolvedTo([RECIPE]);
+    });
+
+    it('should return empty array on error', async () => {
+      const recipes = firstValueFrom(recipeService.getRecipes());
+      const req = httpTesting.expectOne({
+        method: 'GET',
+        url: '/api/recipes',
+      });
+      req.flush('Error occurred', {
+        status: 500,
+        statusText: 'Internal Server Error',
+      });
+      await expectAsync(recipes)
+        .withContext('Fallback for recipes')
+        .toBeResolvedTo([]);
+    });
   });
 });
