@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { ClrSpinner } from '@clr/angular';
 import { AsyncSubject, Subject } from 'rxjs';
 
 import { Recipe } from '@recipe-book/core/models';
@@ -54,6 +55,16 @@ describe('RecipeListComponent', () => {
 
   it('renders', () => {
     expect(component).toBeDefined();
+  });
+
+  it('renders spinner while fetching recipes', () => {
+    const spinnerDe1 = fixture.debugElement.query(By.directive(ClrSpinner));
+    expect(spinnerDe1).withContext('While fetching recipes').toBeDefined();
+    recipe$.next([]);
+    recipe$.complete();
+    fixture.detectChanges();
+    const spinnerDe2 = fixture.debugElement.query(By.directive(ClrSpinner));
+    expect(spinnerDe2).withContext('After fetching recipes').toBeNull();
   });
 
   it('renders a card per recipe', () => {
