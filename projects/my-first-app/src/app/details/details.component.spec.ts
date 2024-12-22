@@ -44,11 +44,11 @@ describe('DetailsComponent', () => {
     harness.detectChanges();
   });
 
-  it('should create', () => {
+  it('renders', () => {
     expect(component).toBeDefined();
   });
 
-  it('should call getHousingLocationById with id from route', () => {
+  it('calls getHousingLocationById with id from route', () => {
     const housingServiceSpy = harness.routeDebugElement!.injector.get(
       HousingService
     ) as jasmine.SpyObj<HousingService>;
@@ -57,11 +57,11 @@ describe('DetailsComponent', () => {
     );
   });
 
-  it('should render listing name', () => {
+  it('renders listing name', () => {
     expect(page.listingHeading.textContent).toContain('Lanco');
   });
 
-  it('should render listing location', () => {
+  it('renders listing location', () => {
     expect(page.listingLocation.textContent)
       .withContext('City name')
       .toContain('Hyderabad');
@@ -70,15 +70,15 @@ describe('DetailsComponent', () => {
       .toContain('TL');
   });
 
-  it('should render listing units available', () => {
+  it('renders listing units available', () => {
     expect(page.listingUnits.textContent).toContain('10');
   });
 
-  it('should render listing wifi availability', () => {
+  it('renders listing wifi availability', () => {
     expect(page.listingWifi.textContent).toContain('Yes');
   });
 
-  it('should render listing laundry availability', () => {
+  it('renders listing laundry availability', () => {
     expect(page.listingLaundry.textContent).toContain('No');
   });
 });

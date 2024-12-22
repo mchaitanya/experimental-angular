@@ -40,24 +40,24 @@ describe('HousingLocationComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('renders', () => {
     expect(component).toBeDefined();
   });
 
-  it('should render listing name', () => {
+  it('renders listing name', () => {
     const headingEl: HTMLElement =
       fixture.nativeElement.querySelector('.listing-heading')!;
     expect(headingEl.textContent).toContain('Mirador');
   });
 
-  it('should render listing location', () => {
+  it('renders listing location', () => {
     const locationEl: HTMLElement =
       fixture.nativeElement.querySelector('.listing-location')!;
     expect(locationEl.textContent).withContext('City name').toContain('Irvine');
     expect(locationEl.textContent).withContext('State name').toContain('CA');
   });
 
-  it('should render detail link', () => {
+  it('renders detail link', () => {
     const linkDe = fixture.debugElement.query(By.directive(RouterLink));
     const routerLink = linkDe.injector.get(RouterLink);
     expect(linkDe.nativeElement.textContent)
@@ -66,7 +66,7 @@ describe('HousingLocationComponent', () => {
     expect(routerLink.href).withContext('Link destination').toBe('/details/10');
   });
 
-  it('should route to detail page', fakeAsync(() => {
+  it('routes to detail page', fakeAsync(() => {
     const linkDe = fixture.debugElement.query(By.directive(RouterLink));
     const router = TestBed.inject(Router);
     router.resetConfig([{ path: '**', children: [] }]);

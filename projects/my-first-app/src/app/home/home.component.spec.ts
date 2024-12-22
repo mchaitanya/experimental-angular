@@ -62,12 +62,12 @@ describe('HomeComponent', () => {
       tick(); // Flush the observable.
     }));
 
-    it('should get housing locations OnInit', fakeAsync(() => {
+    it('gets housing locations OnInit', fakeAsync(() => {
       expect(component.housingLocations).toEqual([LOCATION_HYD, LOCATION_BLR]);
       expect(component.filteredLocations).toEqual([LOCATION_HYD, LOCATION_BLR]);
     }));
 
-    it('should filter housing locations', fakeAsync(() => {
+    it('filters housing locations', fakeAsync(() => {
       component.filterResults('hyd');
       expect(component.filteredLocations)
         .withContext('Filter for "hyd"')
@@ -79,7 +79,7 @@ describe('HomeComponent', () => {
         .toEqual([LOCATION_BLR]);
     }));
 
-    it('should reset housing locations when filter is empty', fakeAsync(() => {
+    it('resets housing locations when filter is empty', fakeAsync(() => {
       component.filterResults('hyd');
       expect(component.filteredLocations)
         .withContext('Filter for "hyd"')
@@ -115,11 +115,11 @@ describe('HomeComponent', () => {
       tick(); // Flush the observable.
     }));
 
-    it('should create', () => {
+    it('renders', () => {
       expect(component).toBeDefined();
     });
 
-    it('should render 2 locations OnInit', () => {
+    it('renders 2 locations OnInit', () => {
       fixture.detectChanges(); // Update the bindings.
       const locationEls = queryLocationElements(fixture);
       expect(locationEls).withContext('Location count').toHaveSize(2);
@@ -131,7 +131,7 @@ describe('HomeComponent', () => {
         .toContain('Bangalore');
     });
 
-    it('should filter housing locations', () => {
+    it('filters housing locations', () => {
       const { inputEl, buttonEl } = queryFilterElements(fixture);
       inputEl.value = 'hyd';
       buttonEl.click();
@@ -144,7 +144,7 @@ describe('HomeComponent', () => {
         .toContain('Hyderabad');
     });
 
-    it('should reset housing locations when filter is empty', () => {
+    it('resets housing locations when filter is empty', () => {
       const { inputEl, buttonEl } = queryFilterElements(fixture);
       inputEl.value = 'hyd';
       buttonEl.click();
@@ -173,12 +173,12 @@ describe('HomeComponent', () => {
       })
     );
 
-    it('should create', () => {
+    it('renders', () => {
       const fixture = MockRender(HomeComponent);
       expect(fixture.point.componentInstance).toBeDefined();
     });
 
-    it('should render 2 locations OnInit', fakeAsync(() => {
+    it('renders 2 locations OnInit', fakeAsync(() => {
       const fixture = MockRender(HomeComponent);
       tick(); // Allow a tick for getAllHousingLocations to emit.
       fixture.detectChanges();
@@ -193,7 +193,7 @@ describe('HomeComponent', () => {
         .toEqual(LOCATION_BLR);
     }));
 
-    it('should filter housing locations', fakeAsync(() => {
+    it('filters housing locations', fakeAsync(() => {
       const fixture = MockRender(HomeComponent);
       tick();
       ngMocks.find('input').nativeElement.value = 'hyd';

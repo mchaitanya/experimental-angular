@@ -40,7 +40,7 @@ describe('HousingService', () => {
     httpTesting.verify();
   });
 
-  it('#getAllHousingLocations should return housing locations.', async () => {
+  it('#getAllHousingLocations fetches housing locations.', async () => {
     const housingLocation$ = housingService.getAllHousingLocations();
     // Convert the observable to a promise. This also subscribes to the observable, making the HTTP request.
     const housingLocations = firstValueFrom(housingLocation$);
@@ -59,7 +59,7 @@ describe('HousingService', () => {
       .toBeResolvedTo([LOCATION]);
   });
 
-  it('#getHousingLocationById should return housing location with given id.', async () => {
+  it('#getHousingLocationById fetches housing location with given id.', async () => {
     const housingLocation = firstValueFrom(
       housingService.getHousingLocationById(1)
     );

@@ -39,7 +39,7 @@ describe('RecipeService', () => {
   });
 
   describe('#getRecipes', () => {
-    it('should return recipes', async () => {
+    it('fetches recipes', async () => {
       const recipes = firstValueFrom(recipeService.getRecipes());
       const req = httpTesting.expectOne(
         {
@@ -54,7 +54,7 @@ describe('RecipeService', () => {
         .toBeResolvedTo([RECIPE]);
     });
 
-    it('should return empty array on error', async () => {
+    it('falls back to empty array on error', async () => {
       const recipes = firstValueFrom(recipeService.getRecipes());
       const req = httpTesting.expectOne({
         method: 'GET',

@@ -4,15 +4,15 @@ describe('YesNoPipe', () => {
   // beforeEach is not required for a pure & stateless pipe.
   const pipe = new YesNoPipe();
 
-  it('should transform true to Yes', () => {
+  it('transforms true to Yes', () => {
     expect(pipe.transform(true)).toBe('Yes');
   });
 
-  it('should transform false to No', () => {
+  it('transforms false to No', () => {
     expect(pipe.transform(false)).toBe('No');
   });
 
-  it('should transform undefined to No', () => {
+  it('transforms undefined to No', () => {
     expect(pipe.transform(undefined)).toBe('No');
   });
 });

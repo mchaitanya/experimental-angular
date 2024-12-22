@@ -52,11 +52,11 @@ describe('RecipeListComponent', () => {
   //   tick(); // Flush the observable from getRecipes if it emits asychronously
   // }));
 
-  it('should create', () => {
+  it('renders', () => {
     expect(component).toBeDefined();
   });
 
-  it('should render a card per recipe', () => {
+  it('renders a card per recipe', () => {
     recipe$.next([RECIPE1, RECIPE2]);
     recipe$.complete();
     fixture.detectChanges(); // Update the bindings
@@ -70,7 +70,7 @@ describe('RecipeListComponent', () => {
       .toContain('Recipe 2');
   });
 
-  it('should render message if there arent any recipes', () => {
+  it('renders message if there arent any recipes', () => {
     recipe$.next([]);
     recipe$.complete();
     fixture.detectChanges();
