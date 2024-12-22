@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import { AsyncPipe } from '@angular/common';
 import { ClrSpinner } from '@clr/angular';
-import { AsyncSubject, Subject } from 'rxjs';
+import { MockBuilder, MockInstance, MockRender, ngMocks } from 'ng-mocks';
+import { AsyncSubject, of } from 'rxjs';
 
 import { Recipe } from '@recipe-book/core/models';
 import { RecipeService } from '@recipe-book/core/services';
@@ -26,68 +26,49 @@ const RECIPE2: Recipe = {
 };
 
 describe('RecipeListComponent', () => {
-  let fixture: ComponentFixture<RecipeListComponent>;
-  let component: RecipeListComponent;
-  let recipe$: Subject<Recipe[]>;
+  MockInstance.scope(); // Creates a scope to reset customizations after each test
 
   beforeEach(() => {
-    recipe$ = new AsyncSubject<Recipe[]>();
-    TestBed.configureTestingModule({
-      imports: [RecipeListComponent],
-      providers: [
-        {
-          provide: RecipeService,
-          useValue: jasmine.createSpyObj<RecipeService>('RecipeService', {
-            getRecipes: recipe$.asObservable(),
-          }),
-        },
-      ],
-    });
-    fixture = TestBed.createComponent(RecipeListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges(); // Call ngOnInit()
+    return MockBuilder(RecipeListComponent).mock(RecipeService).keep(AsyncPipe);
   });
 
-  // beforeEach(fakeAsync(() => {
-  //   fixture.detectChanges(); // Call ngOnInit()
-  //   tick(); // Flush the observable from getRecipes if it emits asychronously
-  // }));
-
   it('renders', () => {
-    expect(component).toBeDefined();
+    const fixture = MockRender(RecipeListComponent);
+    expect(fixture.point.componentInstance).toBeDefined();
   });
 
   it('renders spinner while fetching recipes', () => {
-    const spinnerDe1 = fixture.debugElement.query(By.directive(ClrSpinner));
-    expect(spinnerDe1).withContext('While fetching recipes').toBeDefined();
-    recipe$.next([]);
-    recipe$.complete();
+    const recipes$ = new AsyncSubject<Recipe[]>();
+    MockInstance(RecipeService, 'getRecipes', () => recipes$.asObservable());
+    const fixture = MockRender(RecipeListComponent);
+    const spinnerBefore = ngMocks.find(fixture, ClrSpinner, undefined);
+    expect(spinnerBefore).withContext('While fetching recipes').toBeDefined();
+    recipes$.next([]);
+    recipes$.complete();
     fixture.detectChanges();
-    const spinnerDe2 = fixture.debugElement.query(By.directive(ClrSpinner));
-    expect(spinnerDe2).withContext('After fetching recipes').toBeNull();
+    const spinnerAfter = ngMocks.find(fixture, ClrSpinner, undefined);
+    expect(spinnerAfter).withContext('After fetching recipes').toBeUndefined();
   });
 
   it('renders a card per recipe', () => {
-    recipe$.next([RECIPE1, RECIPE2]);
-    recipe$.complete();
-    fixture.detectChanges(); // Update the bindings
-    const cardDes = fixture.debugElement.queryAll(By.css('.card'));
-    expect(cardDes).withContext('Card count').toHaveSize(2);
-    expect(cardDes[0].nativeElement.textContent)
+    MockInstance(RecipeService, 'getRecipes', () => of([RECIPE1, RECIPE2]));
+    const fixture = MockRender(RecipeListComponent); // By default, MockRender triggers fixture.detectChanges()
+    const cards = ngMocks.findAll(fixture, '.card');
+    expect(cards).withContext('Card count').toHaveSize(2);
+    expect(ngMocks.formatText(cards[0]))
       .withContext('First recipe')
       .toContain('Recipe 1');
-    expect(cardDes[1].nativeElement.textContent)
+    expect(ngMocks.formatText(cards[1]))
       .withContext('Second recipe')
       .toContain('Recipe 2');
   });
 
   it('renders message if there arent any recipes', () => {
-    recipe$.next([]);
-    recipe$.complete();
-    fixture.detectChanges();
-    const cardDes = fixture.debugElement.queryAll(By.css('.card'));
-    expect(cardDes).withContext('Card count').toHaveSize(0);
-    expect((<HTMLElement>fixture.nativeElement).textContent)
+    MockInstance(RecipeService, 'getRecipes', () => of([]));
+    const fixture = MockRender(RecipeListComponent);
+    const cards = ngMocks.findAll(fixture, '.card');
+    expect(cards).withContext('Card count').toHaveSize(0);
+    expect(ngMocks.formatText(fixture))
       .withContext('Empty message')
       .toContain("aren't any recipes");
   });
