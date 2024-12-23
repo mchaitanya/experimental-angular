@@ -3,27 +3,9 @@ import { ClrSpinner } from '@clr/angular';
 import { MockBuilder, MockInstance, MockRender, ngMocks } from 'ng-mocks';
 import { AsyncSubject, of } from 'rxjs';
 
-import { Recipe } from '@recipe-book/core/models';
+import { Recipe, RecipeBuilder } from '@recipe-book/core/models';
 import { RecipeService } from '@recipe-book/core/services';
 import { RecipeListComponent } from './recipe-list.component';
-
-const RECIPE1: Recipe = {
-  id: '1',
-  title: 'Recipe 1',
-  imageUrl: '/resources/recipe1.jpg',
-  servings: 2,
-  ingredients: ['Ingredient 1'],
-  steps: ['Step 1'],
-};
-
-const RECIPE2: Recipe = {
-  id: '2',
-  title: 'Recipe 2',
-  imageUrl: '/resources/recipe2.jpg',
-  servings: 2,
-  ingredients: ['Ingredient 1'],
-  steps: ['Step 1'],
-};
 
 describe('RecipeListComponent', () => {
   MockInstance.scope(); // Creates a scope to reset customizations after each test
@@ -51,7 +33,12 @@ describe('RecipeListComponent', () => {
   });
 
   it('renders a card per recipe', () => {
-    MockInstance(RecipeService, 'getRecipes', () => of([RECIPE1, RECIPE2]));
+    MockInstance(RecipeService, 'getRecipes', () =>
+      of([
+        new RecipeBuilder().withTitle('Recipe 1').build(),
+        new RecipeBuilder().withTitle('Recipe 2').build(),
+      ])
+    );
     const fixture = MockRender(RecipeListComponent); // By default, MockRender triggers fixture.detectChanges()
     const cards = ngMocks.findAll(fixture, '.card');
     expect(cards).withContext('Card count').toHaveSize(2);

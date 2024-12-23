@@ -6,17 +6,8 @@ import {
 import { TestBed } from '@angular/core/testing';
 import { firstValueFrom } from 'rxjs';
 
-import { Recipe } from '@recipe-book/core/models';
+import { RecipeBuilder } from '@recipe-book/core/models';
 import { RecipeService } from './recipe.service';
-
-const RECIPE: Recipe = {
-  id: '1',
-  title: 'Recipe',
-  imageUrl: '/resources/recipe.jpg',
-  servings: 2,
-  ingredients: ['Ingredient 1'],
-  steps: ['Step 1'],
-};
 
 describe('RecipeService', () => {
   let httpTesting: HttpTestingController;
@@ -40,6 +31,7 @@ describe('RecipeService', () => {
 
   describe('#getRecipes', () => {
     it('fetches recipes', async () => {
+      const RECIPE = new RecipeBuilder().build();
       const recipes = firstValueFrom(recipeService.getRecipes());
       const req = httpTesting.expectOne(
         {
