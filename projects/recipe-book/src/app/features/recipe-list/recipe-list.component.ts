@@ -15,7 +15,7 @@ import { RecipeService } from '@recipe-book/core/services';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RecipeListComponent {
-  recipes$: Observable<Recipe[]>;
+  public recipes$: Observable<Recipe[]>;
 
   constructor(private recipeService: RecipeService) {
     this.recipes$ = this.recipeService.getRecipes();

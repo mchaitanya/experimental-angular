@@ -1,1 +1,26 @@
-<p>recipe-filter works!</p>
+<form
+  [formGroup]="filterForm"
+  (ngSubmit)="onFilter()"
+  clrForm
+  clrLayout="vertical"
+  role="search">
+  <h2 cds-text="section">Filters</h2>
+  <clr-input-container>
+    <label for="keyword">Keyword</label>
+    <input clrInput type="text" formControlName="keyword" id="keyword" />
+  </clr-input-container>
+  <clr-input-container>
+    <label for="max-prep-time">Prep time less than</label>
+    <input
+      clrInput
+      type="number"
+      formControlName="maxPrepTime"
+      id="max-prep-time" />
+  </clr-input-container>
+  <div class="btn-container">
+    <button [disabled]="isEmpty()" class="btn btn-primary" type="submit">
+      Apply
+    </button>
+    <button (click)="onClear()" class="btn" type="button">Clear</button>
+  </div>
+</form>
