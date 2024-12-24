@@ -1,20 +1,16 @@
-<div class="clr-row clr-justify-content-center">
+<div cds-layout="grid cols@sm:6 cols@md:4 cols@lg:3 gap:xl align:center">
   @if (recipes$ | async; as recipes) {
     @for (recipe of recipes; track recipe.id) {
-      <div class="clr-col-xl-3 clr-col-lg-4 clr-col-md-6 clr-col-12">
-        <div class="card">
-          <div class="card-img">
-            <img [src]="recipe.imageUrl" [alt]="recipe.title" />
-          </div>
-          <div class="card-header">{{ recipe.title }}</div>
+      <div cds-layout="m-t:none" class="card">
+        <div class="card-img">
+          <img [src]="recipe.imageUrl" [alt]="recipe.title" />
         </div>
+        <div cds-text="center" class="card-header">{{ recipe.title }}</div>
       </div>
     } @empty {
-      <div>There aren't any recipes</div>
+      <div cds-layout="col:12">There aren't any recipes</div>
     }
   } @else {
-    <div class="clr-col-auto">
-      <clr-spinner>Loading ...</clr-spinner>
-    </div>
+    <clr-spinner cds-layout="col:12">Loading ...</clr-spinner>
   }
 </div>

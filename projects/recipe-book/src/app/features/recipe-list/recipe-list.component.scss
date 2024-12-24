@@ -1,10 +1,5 @@
-.card {
-  .card-img > img {
-    margin-top: var(--cds-global-space-7);
-    height: 200px;
-    object-fit: contain;
-  }
-  .card-header {
-    text-align: center;
-  }
+.card-img > img {
+  margin-top: var(--cds-global-space-7);
+  height: 200px;
+  object-fit: contain;
 }
