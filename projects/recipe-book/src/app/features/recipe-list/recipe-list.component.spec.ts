@@ -1,18 +1,23 @@
 import { AsyncPipe } from '@angular/common';
 import { ClrSpinner } from '@clr/angular';
 import { MockBuilder, MockInstance, MockRender, ngMocks } from 'ng-mocks';
-import { AsyncSubject, of } from 'rxjs';
+import { AsyncSubject, EMPTY, of } from 'rxjs';
 
-import { Recipe, RecipeBuilder } from '@recipe-book/core/models';
+import { EMPTY_FILTER, Recipe, RecipeBuilder } from '@recipe-book/core/models';
 import { RecipeService } from '@recipe-book/core/services';
 import { RecipeListComponent } from './recipe-list.component';
 
 describe('RecipeListComponent', () => {
   MockInstance.scope(); // Creates a scope to reset customizations after each test
 
-  beforeEach(() => {
-    return MockBuilder(RecipeListComponent).mock(RecipeService).keep(AsyncPipe);
-  });
+  beforeEach(() =>
+    MockBuilder(RecipeListComponent)
+      .mock(RecipeService, {
+        getRecipes: () => EMPTY,
+        recipeFilter$: of(EMPTY_FILTER),
+      })
+      .keep(AsyncPipe)
+  );
 
   it('renders', () => {
     const fixture = MockRender(RecipeListComponent);

@@ -19,13 +19,13 @@ export class RecipeService {
     this.recipeFilter$ = this.recipeFilterSubject.asObservable();
   }
 
-  getRecipes(): Observable<Recipe[]> {
+  public getRecipes(): Observable<Recipe[]> {
     return this.http
       .get<Recipe[]>(`${BASE_PATH}/recipes`)
       .pipe(catchError(() => of([]))); // Fall back to empty array on error
   }
 
-  updateRecipeFilter(filter: RecipeFilter) {
+  public updateRecipeFilter(filter: RecipeFilter) {
     this.recipeFilterSubject.next(filter);
   }
 }

@@ -1,9 +1,9 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ClrSpinnerModule } from '@clr/angular';
-import { Observable } from 'rxjs';
+import { combineLatestWith, map, Observable } from 'rxjs';
 
-import { Recipe } from '@recipe-book/core/models';
+import { applyFilter, Recipe, RecipeFilter } from '@recipe-book/core/models';
 import { RecipeService } from '@recipe-book/core/services';
 
 @Component({
@@ -15,9 +15,14 @@ import { RecipeService } from '@recipe-book/core/services';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RecipeListComponent {
-  public recipes$: Observable<Recipe[]>;
+  public recipes$: Observable<Recipe[]>; // Recipes after applying any filters
 
   constructor(private recipeService: RecipeService) {
-    this.recipes$ = this.recipeService.getRecipes();
+    this.recipes$ = this.recipeService.getRecipes().pipe(
+      combineLatestWith(this.recipeService.recipeFilter$),
+      map(([recipes, filter]: [Recipe[], RecipeFilter]) => {
+        return recipes.filter((recipe: Recipe) => applyFilter(recipe, filter));
+      })
+    );
   }
 }
