@@ -5,11 +5,12 @@ import { combineLatestWith, map, Observable } from 'rxjs';
 
 import { applyFilter, Recipe, RecipeFilter } from '@recipe-book/core/models';
 import { RecipeService } from '@recipe-book/core/services';
+import { RecipeCardComponent } from '@recipe-book/features/recipe-card/recipe-card.component';
 
 @Component({
   selector: 'app-recipe-list',
   standalone: true,
-  imports: [AsyncPipe, ClrSpinnerModule],
+  imports: [AsyncPipe, ClrSpinnerModule, RecipeCardComponent],
   templateUrl: './recipe-list.component.html',
   styleUrl: './recipe-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

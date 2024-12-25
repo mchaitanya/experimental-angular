@@ -4,6 +4,7 @@ export interface RecipeFilter {
   keyword: string;
   maxPrepTime: number | null;
 }
+
 export const EMPTY_FILTER: RecipeFilter = {
   keyword: '',
   maxPrepTime: null,

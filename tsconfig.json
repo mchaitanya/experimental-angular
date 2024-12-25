@@ -21,6 +21,7 @@
     "lib": ["ES2022", "dom"],
     "paths": {
       "@recipe-book/core/*": ["./projects/recipe-book/src/app/core/*"],
+      "@recipe-book/features/*": ["./projects/recipe-book/src/app/features/*"],
       "@recipe-book/*": ["./projects/recipe-book/src/*"]
     }
   },

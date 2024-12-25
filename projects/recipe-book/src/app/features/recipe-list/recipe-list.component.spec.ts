@@ -5,6 +5,7 @@ import { AsyncSubject, EMPTY, of } from 'rxjs';
 
 import { EMPTY_FILTER, Recipe, RecipeBuilder } from '@recipe-book/core/models';
 import { RecipeService } from '@recipe-book/core/services';
+import { RecipeCardComponent } from '@recipe-book/features/recipe-card/recipe-card.component';
 import { RecipeListComponent } from './recipe-list.component';
 
 describe('RecipeListComponent', () => {
@@ -45,21 +46,21 @@ describe('RecipeListComponent', () => {
       ])
     );
     const fixture = MockRender(RecipeListComponent); // By default, MockRender triggers fixture.detectChanges()
-    const cards = ngMocks.findAll(fixture, '.card');
-    expect(cards).withContext('Card count').toHaveSize(2);
-    expect(ngMocks.formatText(cards[0]))
+    const recipeCards = ngMocks.findInstances(fixture, RecipeCardComponent);
+    expect(recipeCards).withContext('Card count').toHaveSize(2);
+    expect(recipeCards[0].recipe.title)
       .withContext('First recipe')
-      .toContain('Recipe 1');
-    expect(ngMocks.formatText(cards[1]))
+      .toBe('Recipe 1');
+    expect(recipeCards[1].recipe.title)
       .withContext('Second recipe')
-      .toContain('Recipe 2');
+      .toBe('Recipe 2');
   });
 
   it('renders message if there arent any recipes', () => {
     MockInstance(RecipeService, 'getRecipes', () => of([]));
     const fixture = MockRender(RecipeListComponent);
-    const cards = ngMocks.findAll(fixture, '.card');
-    expect(cards).withContext('Card count').toHaveSize(0);
+    const recipeCards = ngMocks.findInstances(fixture, RecipeCardComponent);
+    expect(recipeCards).withContext('Card count').toHaveSize(0);
     expect(ngMocks.formatText(fixture))
       .withContext('Empty message')
       .toContain("aren't any recipes");
@@ -69,16 +70,16 @@ describe('RecipeListComponent', () => {
     MockInstance(RecipeService, () => ({
       getRecipes: () =>
         of([
-          new RecipeBuilder().withTitle('Keyword').build(),
+          new RecipeBuilder().withTitle('Xyz keyword').build(),
           new RecipeBuilder().withTitle('Something else').build(),
         ]),
       recipeFilter$: of({ keyword: 'keyword', maxPrepTime: null }),
     }));
     const fixture = MockRender(RecipeListComponent); // By default, MockRender triggers fixture.detectChanges()
-    const cards = ngMocks.findAll(fixture, '.card');
-    expect(cards).withContext('Card count').toHaveSize(1);
-    expect(ngMocks.formatText(cards[0]))
+    const recipeCards = ngMocks.findInstances(fixture, RecipeCardComponent);
+    expect(recipeCards).withContext('Card count').toHaveSize(1);
+    expect(recipeCards[0].recipe.title)
       .withContext('Filtered recipe')
-      .toContain('Keyword');
+      .toBe('Xyz keyword');
   });
 });
