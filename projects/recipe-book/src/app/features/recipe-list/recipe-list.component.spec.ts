@@ -64,4 +64,21 @@ describe('RecipeListComponent', () => {
       .withContext('Empty message')
       .toContain("aren't any recipes");
   });
+
+  it('filters recipes', () => {
+    MockInstance(RecipeService, () => ({
+      getRecipes: () =>
+        of([
+          new RecipeBuilder().withTitle('Keyword').build(),
+          new RecipeBuilder().withTitle('Something else').build(),
+        ]),
+      recipeFilter$: of({ keyword: 'keyword', maxPrepTime: null }),
+    }));
+    const fixture = MockRender(RecipeListComponent); // By default, MockRender triggers fixture.detectChanges()
+    const cards = ngMocks.findAll(fixture, '.card');
+    expect(cards).withContext('Card count').toHaveSize(1);
+    expect(ngMocks.formatText(cards[0]))
+      .withContext('Filtered recipe')
+      .toContain('Keyword');
+  });
 });
