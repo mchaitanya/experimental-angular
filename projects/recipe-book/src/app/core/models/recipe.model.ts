@@ -24,8 +24,16 @@ export class RecipeBuilder {
     this.recipe.title = title;
     return this;
   }
+  withPrepTime(prepTime: number): RecipeBuilder {
+    this.recipe.prepTime = prepTime;
+    return this;
+  }
   withIngredient(ingredient: string): RecipeBuilder {
     this.recipe.ingredients.push(ingredient);
+    return this;
+  }
+  withStep(step: string): RecipeBuilder {
+    this.recipe.steps.push(step);
     return this;
   }
   build(): Readonly<Recipe> {
