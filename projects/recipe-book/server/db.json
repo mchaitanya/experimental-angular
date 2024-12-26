@@ -30,7 +30,7 @@
       "id": "2",
       "title": "Lemon pie",
       "imageUrl": "/resources/lemon-pie.jpg",
-      "prepTime": 10,
+      "prepTime": 15,
       "cookTime": 35,
       "servings": 10,
       "ingredients": [
@@ -83,7 +83,7 @@
       "id": "4",
       "title": "Delicious kebab",
       "imageUrl": "/resources/kebab.png",
-      "prepTime": 10,
+      "prepTime": 20,
       "cookTime": 35,
       "servings": 10,
       "ingredients": [
@@ -110,7 +110,7 @@
       "id": "5",
       "title": "Chilli chicken",
       "imageUrl": "/resources/chicken.jpg",
-      "prepTime": 10,
+      "prepTime": 15,
       "cookTime": 35,
       "servings": 10,
       "ingredients": [
@@ -137,7 +137,7 @@
       "id": "6",
       "title": "Cookies",
       "imageUrl": "/resources/cookies.png",
-      "prepTime": 10,
+      "prepTime": 5,
       "cookTime": 35,
       "servings": 10,
       "ingredients": [
@@ -164,7 +164,6 @@
       "id": "7",
       "title": "Cheeseburger",
       "imageUrl": "/resources/burger.png",
-      "prepTime": 10,
       "cookTime": 35,
       "servings": 10,
       "ingredients": [
@@ -191,7 +190,7 @@
       "id": "8",
       "title": "Chilli Chicken",
       "imageUrl": "/resources/chicken.jpg",
-      "prepTime": 10,
+      "prepTime": 15,
       "cookTime": 35,
       "servings": 10,
       "ingredients": [
@@ -245,7 +244,7 @@
       "id": "10",
       "title": "Lemon pie",
       "imageUrl": "/resources/lemon-pie.jpg",
-      "prepTime": 10,
+      "prepTime": 15,
       "cookTime": 35,
       "servings": 10,
       "ingredients": [
@@ -272,7 +271,7 @@
       "id": "11",
       "title": "Chilli chicken",
       "imageUrl": "/resources/chicken.jpg",
-      "prepTime": 10,
+      "prepTime": 15,
       "cookTime": 35,
       "servings": 10,
       "ingredients": [

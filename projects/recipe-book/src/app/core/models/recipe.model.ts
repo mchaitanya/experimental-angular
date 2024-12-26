@@ -24,6 +24,10 @@ export class RecipeBuilder {
     this.recipe.title = title;
     return this;
   }
+  withImageUrl(imageUrl: string): RecipeBuilder {
+    this.recipe.imageUrl = imageUrl;
+    return this;
+  }
   withPrepTime(prepTime: number): RecipeBuilder {
     this.recipe.prepTime = prepTime;
     return this;

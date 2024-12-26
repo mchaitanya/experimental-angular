@@ -1,6 +1,13 @@
-<div cds-layout="m-t:none" class="card">
+<div class="card" cds-layout="m:none">
   <div class="card-img">
     <img [src]="recipe.imageUrl" [alt]="recipe.title" />
   </div>
-  <div cds-text="center" class="card-header">{{ recipe.title }}</div>
+  <div class="card-block" cds-text="center">
+    <div class="card-title">{{ recipe.title }}</div>
+    <div class="card-text" cds-text="secondary">
+      @if (recipe.prepTime) {
+        <div>Prep time - {{ recipe.prepTime }} min</div>
+      }
+    </div>
+  </div>
 </div>
