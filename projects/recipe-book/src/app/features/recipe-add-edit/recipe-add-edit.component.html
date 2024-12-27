@@ -44,7 +44,7 @@
   <div class="fieldset-container" cds-layout="grid m-t:xl">
     <fieldset formArrayName="ingredients">
       <legend cds-text="subsection" cds-layout="col@sm:4 col:12 m-t:xxs">
-        Ingredients
+        <span class="clr-required-mark">Ingredients</span>
       </legend>
       <div class="fieldset-controls" cds-layout="col@sm:8 col:12">
         @for (
@@ -53,13 +53,13 @@
           let index = $index
         ) {
           <clr-input-container>
-            <label [for]="'ingredient' + index" class="clr-sr-only"
+            <label [for]="'recipe-ingredient-' + index" class="clr-sr-only"
               >Ingredient {{ index }}</label
             >
             <input
               clrInput
               [formControlName]="index"
-              [id]="'ingredient' + index"
+              [id]="'recipe-ingredient-' + index"
               class="clr-col-12"
               type="text" />
           </clr-input-container>
@@ -70,7 +70,7 @@
   <div class="fieldset-container" cds-layout="grid m-t:xl">
     <fieldset formArrayName="steps">
       <legend cds-text="subsection" cds-layout="col@sm:4 col:12 m-t:xxs">
-        Steps
+        <span class="clr-required-mark">Steps</span>
       </legend>
       <div class="fieldset-controls" cds-layout="col@sm:8 col:12">
         @for (
@@ -79,13 +79,13 @@
           let index = $index
         ) {
           <clr-input-container>
-            <label [for]="'step' + index" class="clr-sr-only"
+            <label [for]="'recipe-step-' + index" class="clr-sr-only"
               >Step {{ index }}</label
             >
             <input
               clrInput
               [formControlName]="index"
-              [id]="'step' + index"
+              [id]="'recipe-step-' + index"
               class="clr-col-12"
               type="text" />
           </clr-input-container>

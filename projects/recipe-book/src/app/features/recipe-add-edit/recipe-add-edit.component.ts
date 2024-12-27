@@ -28,13 +28,16 @@ export class RecipeAddEditComponent {
 
   constructor(private fb: FormBuilder) {
     this.recipeForm = this.fb.group({
-      title: ['', Validators.required],
-      imageUrl: ['', Validators.required],
+      title: ['Title', Validators.required],
+      imageUrl: ['http://cloud.store/recipe.jpg', Validators.required],
       prepTime: null,
       cookTime: null,
-      servings: [null, Validators.required],
-      ingredients: this.fb.array(['Ingredient 1', 'Ingredient 2']),
-      steps: this.fb.array(['Step 1', 'Step 2']),
+      servings: [2, [Validators.required, Validators.min(1)]],
+      ingredients: this.fb.array(
+        ['Ingredient 1', 'Ingredient 2'],
+        Validators.required
+      ),
+      steps: this.fb.array(['Step 1', 'Step 2'], Validators.required),
     });
   }
 }
