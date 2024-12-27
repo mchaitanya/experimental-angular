@@ -1,0 +1,96 @@
+<form
+  [formGroup]="recipeForm"
+  clrForm
+  clrLabelSize="4"
+  cds-layout="container:sm container:center">
+  <h2 cds-text="section">New recipe</h2>
+  <p class="clr-required-mark">Required fields</p>
+  <clr-input-container>
+    <label class="clr-required-mark" for="recipe-title">Title</label>
+    <input clrInput type="text" formControlName="title" id="recipe-title" />
+  </clr-input-container>
+  <!-- Todo: Add file picker for recipe image
+  https://clarity.design/documentation/file-picker -->
+  <clr-input-container>
+    <label class="clr-required-mark" for="recipe-image">Image URL</label>
+    <input clrInput type="text" formControlName="imageUrl" id="recipe-image" />
+  </clr-input-container>
+  <clr-input-container>
+    <label for="recipe-prep-time">Prep time (Minutes)</label>
+    <input
+      clrInput
+      type="number"
+      formControlName="prepTime"
+      id="recipe-prep-time" />
+  </clr-input-container>
+  <clr-input-container>
+    <label for="recipe-cook-time">Cook time (Minutes)</label>
+    <input
+      clrInput
+      type="number"
+      formControlName="cookTime"
+      id="recipe-cook-time" />
+  </clr-input-container>
+  <clr-input-container>
+    <label class="clr-required-mark" for="recipe-servings">Servings</label>
+    <input
+      clrInput
+      type="number"
+      formControlName="servings"
+      id="recipe-servings" />
+  </clr-input-container>
+  <!-- Below sm breakpoint, clrForm switches from horizontal to vertical. Apply similar logic for <fieldset> grid.
+  <legend> spans 4 columns, same as clrLabelSize. -->
+  <div class="fieldset-container" cds-layout="grid m-t:xl">
+    <fieldset formArrayName="ingredients">
+      <legend cds-text="subsection" cds-layout="col@sm:4 col:12 m-t:xxs">
+        Ingredients
+      </legend>
+      <div class="fieldset-controls" cds-layout="col@sm:8 col:12">
+        @for (
+          control of ingredientsArray.controls;
+          track control;
+          let index = $index
+        ) {
+          <clr-input-container>
+            <label [for]="'ingredient' + index" class="clr-sr-only"
+              >Ingredient {{ index }}</label
+            >
+            <input
+              clrInput
+              [formControlName]="index"
+              [id]="'ingredient' + index"
+              class="clr-col-12"
+              type="text" />
+          </clr-input-container>
+        }
+      </div>
+    </fieldset>
+  </div>
+  <div class="fieldset-container" cds-layout="grid m-t:xl">
+    <fieldset formArrayName="steps">
+      <legend cds-text="subsection" cds-layout="col@sm:4 col:12 m-t:xxs">
+        Steps
+      </legend>
+      <div class="fieldset-controls" cds-layout="col@sm:8 col:12">
+        @for (
+          control of stepsArray.controls;
+          track control;
+          let index = $index
+        ) {
+          <clr-input-container>
+            <label [for]="'step' + index" class="clr-sr-only"
+              >Step {{ index }}</label
+            >
+            <input
+              clrInput
+              [formControlName]="index"
+              [id]="'step' + index"
+              class="clr-col-12"
+              type="text" />
+          </clr-input-container>
+        }
+      </div>
+    </fieldset>
+  </div>
+</form>

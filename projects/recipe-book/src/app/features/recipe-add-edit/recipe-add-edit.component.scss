@@ -1,0 +1,20 @@
+clr-input-container input[type='text'] {
+  width: 100%;
+}
+
+// Can't make fieldset a grid in Chrome
+// https://stackoverflow.com/a/72026002
+.fieldset-container > fieldset {
+  display: contents;
+}
+
+// Below sm breakpoint, Clarity switches form layout from horizontal to vertical
+// Remove the margin & padding at that time
+@media (min-width: 768px) {
+  .fieldset-controls {
+    padding-left: var(--cds-global-space-5);
+    > clr-input-container:first-child {
+      margin-top: 0;
+    }
+  }
+}
