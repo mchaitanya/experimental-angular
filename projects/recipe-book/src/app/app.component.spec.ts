@@ -1,21 +1,13 @@
 import { TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { MockComponent } from 'ng-mocks';
 
 import { AppComponent } from './app.component';
-import { RecipeService } from './core/services';
+import { HomeComponent } from './features/home/home.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
-      providers: [
-        {
-          provide: RecipeService,
-          useValue: jasmine.createSpyObj<RecipeService>('RecipeService', {
-            getRecipes: of([]),
-          }),
-        },
-      ],
+      imports: [AppComponent, MockComponent(HomeComponent)],
     }).compileComponents();
   });
 
