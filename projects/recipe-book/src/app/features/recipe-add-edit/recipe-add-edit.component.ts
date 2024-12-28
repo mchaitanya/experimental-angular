@@ -6,12 +6,15 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ClrFormsModule } from '@clr/angular';
+import { ClarityIcons, plusIcon, timesIcon } from '@cds/core/icon';
+import { ClrFormsModule, ClrIconModule } from '@clr/angular';
+
+ClarityIcons.addIcons(plusIcon, timesIcon);
 
 @Component({
   selector: 'app-recipe-add-edit',
   standalone: true,
-  imports: [ReactiveFormsModule, ClrFormsModule],
+  imports: [ReactiveFormsModule, ClrFormsModule, ClrIconModule],
   templateUrl: './recipe-add-edit.component.html',
   styleUrl: './recipe-add-edit.component.scss',
 })
@@ -33,11 +36,16 @@ export class RecipeAddEditComponent {
       prepTime: null,
       cookTime: null,
       servings: [2, [Validators.required, Validators.min(1)]],
-      ingredients: this.fb.array(
-        ['Ingredient 1', 'Ingredient 2'],
-        Validators.required
-      ),
+      ingredients: this.fb.array(['Ingredient 1'], Validators.required),
       steps: this.fb.array(['Step 1', 'Step 2'], Validators.required),
     });
+  }
+
+  public addControl(formArray: FormArray) {
+    formArray.push(this.fb.control('', Validators.required));
+  }
+
+  public removeControl(formArray: FormArray, index: number) {
+    formArray.removeAt(index);
   }
 }

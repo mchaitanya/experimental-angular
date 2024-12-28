@@ -41,54 +41,94 @@
   </clr-input-container>
   <!-- Below sm breakpoint, clrForm switches from horizontal to vertical. Apply similar logic for <fieldset> grid.
   <legend> spans 4 columns, same as clrLabelSize. -->
-  <div class="fieldset-container" cds-layout="grid m-t:xl">
+  <div class="fieldset" cds-layout="grid m-t:xl">
     <fieldset formArrayName="ingredients">
       <legend cds-text="subsection" cds-layout="col@sm:4 col:12 m-t:xxs">
         <span class="clr-required-mark">Ingredients</span>
+        <button
+          (click)="addControl(ingredientsArray)"
+          class="btn btn-sm btn-link btn-icon"
+          cds-layout="m-t:xxs"
+          type="button"
+          aria-label="Add ingredient">
+          <cds-icon shape="plus" />
+        </button>
       </legend>
-      <div class="fieldset-controls" cds-layout="col@sm:8 col:12">
+      <div
+        class="fieldset__controls"
+        cds-layout="col@sm:8 col:12 vertical gap:lg m-t:sm m-t@sm:none p-l@sm:xs">
         @for (
           control of ingredientsArray.controls;
           track control;
           let index = $index
         ) {
-          <clr-input-container>
-            <label [for]="'recipe-ingredient-' + index" class="clr-sr-only"
-              >Ingredient {{ index }}</label
-            >
-            <input
-              clrInput
-              [formControlName]="index"
-              [id]="'recipe-ingredient-' + index"
-              class="clr-col-12"
-              type="text" />
-          </clr-input-container>
+          <div class="fieldset__control" cds-layout="horizontal gap:sm">
+            <clr-input-container cds-layout="align:stretch m-t:none">
+              <label [for]="'recipe-ingredient-' + index" class="clr-sr-only"
+                >Ingredient {{ index }}</label
+              >
+              <input
+                clrInput
+                [formControlName]="index"
+                [id]="'recipe-ingredient-' + index"
+                class="clr-col-12"
+                type="text" />
+            </clr-input-container>
+            <button
+              (click)="removeControl(ingredientsArray, index)"
+              class="btn btn-sm btn-link btn-icon"
+              cds-layout="m:none p:none"
+              type="button"
+              aria-label="Remove ingredient">
+              <cds-icon shape="times" status="danger" />
+            </button>
+          </div>
         }
       </div>
     </fieldset>
   </div>
-  <div class="fieldset-container" cds-layout="grid m-t:xl">
+  <div class="fieldset" cds-layout="grid m-t:xl">
     <fieldset formArrayName="steps">
       <legend cds-text="subsection" cds-layout="col@sm:4 col:12 m-t:xxs">
         <span class="clr-required-mark">Steps</span>
+        <button
+          (click)="addControl(stepsArray)"
+          class="btn btn-sm btn-link btn-icon"
+          cds-layout="m-t:xxs"
+          type="button"
+          aria-label="Add step">
+          <cds-icon shape="plus" />
+        </button>
       </legend>
-      <div class="fieldset-controls" cds-layout="col@sm:8 col:12">
+      <div
+        class="fieldset__controls"
+        cds-layout="col@sm:8 col:12 vertical gap:lg m-t:sm m-t@sm:none p-l@sm:xs">
         @for (
           control of stepsArray.controls;
           track control;
           let index = $index
         ) {
-          <clr-input-container>
-            <label [for]="'recipe-step-' + index" class="clr-sr-only"
-              >Step {{ index }}</label
-            >
-            <input
-              clrInput
-              [formControlName]="index"
-              [id]="'recipe-step-' + index"
-              class="clr-col-12"
-              type="text" />
-          </clr-input-container>
+          <div class="fieldset__control" cds-layout="horizontal gap:sm">
+            <clr-input-container cds-layout="align:stretch m-t:none">
+              <label [for]="'recipe-step-' + index" class="clr-sr-only"
+                >Step {{ index }}</label
+              >
+              <input
+                clrInput
+                [formControlName]="index"
+                [id]="'recipe-step-' + index"
+                class="clr-col-12"
+                type="text" />
+            </clr-input-container>
+            <button
+              (click)="removeControl(stepsArray, index)"
+              class="btn btn-sm btn-link btn-icon"
+              cds-layout="m:none p:none"
+              type="button"
+              aria-label="Remove step">
+              <cds-icon shape="times" status="danger" />
+            </button>
+          </div>
         }
       </div>
     </fieldset>
