@@ -10,8 +10,8 @@
     "prepare": "husky install",
     "lint": "ng lint",
     "server": "json-server",
-    "server:recipe-book-random": "json-server projects/recipe-book/server/index.js",
-    "server:recipe-book": "json-server --config=projects/recipe-book/server/json-server.json projects/recipe-book/server/db.json"
+    "server:recipe-book": "json-server projects/recipe-book/server/index.js",
+    "server:recipe-book-hardcoded": "json-server --config=projects/recipe-book/server/json-server.json projects/recipe-book/server/db.json"
   },
   "private": true,
   "dependencies": {

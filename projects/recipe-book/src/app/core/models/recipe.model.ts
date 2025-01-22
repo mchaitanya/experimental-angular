@@ -8,7 +8,7 @@ export interface Recipe {
   ingredients: string[];
   steps: string[];
   rating?: number;
-  tags?: string[];
+  category?: string;
 }
 
 export class RecipeBuilder {
