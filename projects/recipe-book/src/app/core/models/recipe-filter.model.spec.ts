@@ -20,14 +20,14 @@ describe('applyFilter', () => {
 
     it('returns true if found in an ingredient', () => {
       const recipe = new RecipeBuilder()
-        .withIngredient('2 spoons of keyword')
+        .withIngredients(['2 spoons of keyword'])
         .build();
       const filter = { keyword: 'keyword', maxPrepTime: null };
       expect(applyFilter(recipe, filter)).toBeTrue();
     });
 
     it('returns true if found in a step', () => {
-      const recipe = new RecipeBuilder().withStep('Do keyword').build();
+      const recipe = new RecipeBuilder().withSteps(['Do keyword']).build();
       const filter = { keyword: 'keyword', maxPrepTime: null };
       expect(applyFilter(recipe, filter)).toBeTrue();
     });
@@ -35,8 +35,8 @@ describe('applyFilter', () => {
     it('return false if not found in either title, ingredients or steps', () => {
       const recipe = new RecipeBuilder()
         .withTitle('Something')
-        .withIngredient('Some ingredient')
-        .withStep('Do something')
+        .withIngredients(['Some ingredient'])
+        .withSteps(['Do something'])
         .build();
       const filter = { keyword: 'keyword', maxPrepTime: null };
       expect(applyFilter(recipe, filter)).toBeFalse();

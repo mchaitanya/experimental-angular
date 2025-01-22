@@ -1,5 +1,5 @@
 export interface Recipe {
-  id: string;
+  id: number;
   title: string;
   imageUrl: string;
   prepTime?: number;
@@ -13,33 +13,64 @@ export interface Recipe {
 
 export class RecipeBuilder {
   private recipe: Recipe = {
-    id: 'id',
+    id: 1,
     title: 'Recipe',
     imageUrl: '/resources/recipe.jpg',
     servings: 2,
     ingredients: [],
     steps: [],
   };
+
+  withId(id: number): RecipeBuilder {
+    this.recipe.id = id;
+    return this;
+  }
+
   withTitle(title: string): RecipeBuilder {
     this.recipe.title = title;
     return this;
   }
+
   withImageUrl(imageUrl: string): RecipeBuilder {
     this.recipe.imageUrl = imageUrl;
     return this;
   }
-  withPrepTime(prepTime: number): RecipeBuilder {
+
+  withPrepTime(prepTime: number | undefined): RecipeBuilder {
     this.recipe.prepTime = prepTime;
     return this;
   }
-  withIngredient(ingredient: string): RecipeBuilder {
-    this.recipe.ingredients.push(ingredient);
+
+  withCookTime(cookTime: number | undefined): RecipeBuilder {
+    this.recipe.cookTime = cookTime;
     return this;
   }
-  withStep(step: string): RecipeBuilder {
-    this.recipe.steps.push(step);
+
+  withServings(servings: number): RecipeBuilder {
+    this.recipe.servings = servings;
     return this;
   }
+
+  withIngredients(ingredients: string[]): RecipeBuilder {
+    this.recipe.ingredients = ingredients;
+    return this;
+  }
+
+  withSteps(steps: string[]): RecipeBuilder {
+    this.recipe.steps = steps;
+    return this;
+  }
+
+  withRating(rating: number | undefined): RecipeBuilder {
+    this.recipe.rating = rating;
+    return this;
+  }
+
+  withCategory(category: string | undefined): RecipeBuilder {
+    this.recipe.category = category;
+    return this;
+  }
+
   build(): Readonly<Recipe> {
     return Object.freeze(this.recipe);
   }
